@@ -6,6 +6,8 @@
 - create random color changing over time
 - create different fun shapes etc, with select and random
 - make it pretty
-- implement sliders for 
-    - color
-    - size
+    - fonts
+    - etc
+- saving
+- sharing
+- undo & redo
