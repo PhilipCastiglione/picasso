@@ -1,0 +1,12 @@
+h1 {
+  text-align: center;
+  color: blue;
+  height: 50px;
+  line-height: 50px;
+}
+
+canvas {
+  background: linen;
+  margin: 0 auto;
+  display: block;
+}
