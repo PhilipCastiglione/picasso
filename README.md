@@ -1,4 +1,5 @@
 # PICASSO
+[try it out](http://philipcastiglione.github.io/picasso/)
 
 ### to do
 - implement switch for draw vs place
