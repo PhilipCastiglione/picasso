@@ -1,17 +1,27 @@
 header {
   height: 50px;
-  line-height: 50px;
+}
+
+header div {
+  display: inline-block;
 }
 
 #title {
   text-align: center;
   color: blue;
   margin: auto;
-  display: inline-block;
 }
 
 #draw-color {
-  display: inline-block;
+  border: 1px solid red;
+}
+
+#draw-size {
+  border: 1px solid blue;
+}
+
+input {
+  width: 50px;
 }
 
 canvas {

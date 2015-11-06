@@ -4,18 +4,10 @@ var ctx = canvasElement.getContext('2d');
 
 // CANVAS DRAW FUNCTION
 function draw() {
-  var red = document.getElementById('draw-color-red').value;
-  var green = document.getElementById('draw-color-green').value;
-  var blue = document.getElementById('draw-color-blue').value;
-  var alpha = document.getElementById('draw-color-alpha').value;
   ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-  
-  var x = mouseX;
-  var y = mouseY - headerHeight;
-  ctx.fillRect(x, y, 5, 5);
+  ctx.fillRect(mouseX, mouseY - headerHeight, size, size);
 }
 
-// EVENTS
 // CANVAS SIZE
 var headerHeight = 50;
 function setCanvasSize() {
@@ -24,6 +16,21 @@ function setCanvasSize() {
 }
 setCanvasSize();
 window.onresize = setCanvasSize;
+
+// DRAWING CONTENT EVENTS
+var red, green, blue, alpha, size;
+function updateDrawContentStyle() {
+  red = document.getElementById('draw-color-red').value;
+  green = document.getElementById('draw-color-green').value;
+  blue = document.getElementById('draw-color-blue').value;
+  alpha = document.getElementById('draw-color-alpha').value;
+  size = document.getElementById('draw-size-px').value;
+}
+updateDrawContentStyle();
+var contentStyles = document.getElementsByClassName('content-style');
+for (var i = 0; i < contentStyles.length - 1; i++) {
+  contentStyles[i].addEventListener('change', updateDrawContentStyle);
+}
 
 // MOUSE TRACKING
 var mouseX, mouseY;
