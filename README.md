@@ -7,5 +7,5 @@
 - create different fun shapes etc, with select and random
 - make it pretty
 - implement sliders for 
-    1 color
-    2 size
+    - color
+    - size
