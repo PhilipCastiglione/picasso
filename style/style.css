@@ -20,6 +20,10 @@ header div {
   border: 1px solid blue;
 }
 
+#draw-repeat {
+  border: 1px solid orange;
+}
+
 input {
   width: 50px;
 }
