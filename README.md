@@ -2,8 +2,8 @@
 
 ### to do
 implement sliders for 
- - color
- - size
+- color
+- size
 implement switch for draw vs place
 make nice header
 create different fun shapes etc, with select and random
