@@ -18,4 +18,5 @@ canvas {
   background: linen;
   margin: 0 auto;
   display: block;
+  cursor: pointer;
 }
