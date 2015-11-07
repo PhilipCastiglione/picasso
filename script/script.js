@@ -20,6 +20,9 @@
 
   // DRAWING CONTENT STYLES
   var red, green, blue, alpha, size, repeat;
+  function updateShapeColors() {
+    
+  }
   function updateDrawSample() {
     var drawSampleElement = document.getElementById('draw-sample');
     drawSampleElement.style.backgroundColor = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
@@ -37,6 +40,7 @@
     } else {
       repeat = 10000;
     }
+    updateShapeColors();
     updateDrawSample();
   }
   updateDrawContentStyles();

@@ -1,22 +1,80 @@
+/* HEADER */
 header {
-  background: linen;
-}
-
-#title {
+  background: #A57E62;
   text-align: center;
-  color: blue;
-  margin: auto;
+  padding: .5em;
 }
 
+h1 {
+  font-size: 2em;
+}
+
+/* LEFT ASIDE */
+#shapes {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  width: 110px;
+}
+
+.shape {
+  margin: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#square {
+  width: 40px;
+  height: 40px;
+  background: grey;
+}
+
+#circle {
+  width: 40px;
+  height: 40px;
+  background: grey;
+  border-radius: 50%;
+}
+
+#triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid grey;
+}
+
+#diamond {
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-bottom-color: grey;
+  position: relative;
+  top: -20px;
+}
+
+#diamond:after {
+  content: '';
+  position: absolute;
+  left: -20px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border: 20px solid transparent;
+  border-top-color: grey;
+}
+
+/* RIGHT ASIDE */
 #sample-container {
   position: fixed;
   top: 70px;
-  right: 15px;
+  right: 30px;
   background: rgb(240, 240, 240);
   width: 100px;
   height: 100px;
   line-height: 100px;
   text-align: center;
+  border-radius: 15px;
 }
 
 #draw-sample {
@@ -28,7 +86,7 @@ header {
 #draw-settings {
   position: fixed;
   top: 200px;
-  right: 0;
+  right: 20px;
   text-align: center;
 }
 
@@ -40,6 +98,7 @@ input {
   display: inline;
 }
 
+/* CANVAS GRID */
 canvas {
   background: white;
   margin: 0 auto;
