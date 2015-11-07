@@ -3,12 +3,11 @@
 
 ### to do
 - refactor
-- make nice header
 - create random color changing over time
 - create different fun shapes etc, with select and random
-    - add color to example shapes
 - make it pretty
     - fonts
+    - header
     - etc
 - saving
 - sharing
