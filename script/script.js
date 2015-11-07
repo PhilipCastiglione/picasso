@@ -4,10 +4,45 @@
   var ctx = canvasElement.getContext('2d');
 
   // CANVAS DRAW FUNCTION
-  var headerHeight = 50;
-  function draw() {
+  var shape = 'square';
+  function updateDrawSample() {
+    mouseX = window.innerWidth - 85;
+    mouseY = 140;
+    ctx.fillStyle = "rgb(245, 245, 245)";
+    ctx.fillRect(mouseX - 50, mouseY - headerHeight - 50, 100, 100);
+    drawShape();
+  }
+  function updateShape() {
+    shape = event.target.dataset.shape;
+    updateDrawSample();
+  }
+  var shapes = document.getElementsByClassName('shape');
+  for (var i = 0; i < shapes.length; i++) {
+    shapes[i].addEventListener('click', updateShape);
+  }
+  var headerHeight = document.getElementById('header').offsetHeight;
+  function drawSquare() {
     ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    ctx.fillRect(mouseX, mouseY - headerHeight, size, size);
+    ctx.fillRect(mouseX - size / 2, mouseY - headerHeight - size / 2, size, size);
+  }
+  function drawCircle() {
+    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY - headerHeight, size / 2, 0, Math.PI*2, true);
+    ctx.fill();
+  }
+  function drawShape() {
+    switch (shape) {
+      case 'square':
+        drawSquare();
+        break;
+      case 'circle':
+        drawCircle();
+        break;
+      default:
+        console.log('drawShape error');
+        break;
+    }
   }
 
   // CANVAS SIZE
@@ -20,15 +55,6 @@
 
   // DRAWING CONTENT STYLES
   var red, green, blue, alpha, size, repeat;
-  function updateShapeColors() {
-    
-  }
-  function updateDrawSample() {
-    var drawSampleElement = document.getElementById('draw-sample');
-    drawSampleElement.style.backgroundColor = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    drawSampleElement.style.height = size + "px";
-    drawSampleElement.style.width = size + "px";
-  }
   function updateDrawContentStyles() {
     red = document.getElementById('red').value;
     green = document.getElementById('green').value;
@@ -40,7 +66,6 @@
     } else {
       repeat = 10000;
     }
-    updateShapeColors();
     updateDrawSample();
   }
   updateDrawContentStyles();
@@ -61,8 +86,8 @@
   canvasElement.addEventListener('mousedown', startDrawing);
   var drawTimer;
   function startDrawing() {
-    draw();
-    drawTimer = setInterval(draw, repeat);
+    drawShape();
+    drawTimer = setInterval(drawShape, repeat);
   }
   canvasElement.addEventListener('mouseup', stopDrawing);
   function stopDrawing() {
