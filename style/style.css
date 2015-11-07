@@ -14,10 +14,11 @@ header div {
   margin: auto;
 }
 
-#example-color {
-  width: 30px;
-  height: 30px;
-  margin-top: 10px;
+#draw-sample {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border: 3px solid white;
 }
 
 input {

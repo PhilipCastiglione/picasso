@@ -20,9 +20,11 @@
 
   // DRAWING CONTENT STYLES
   var red, green, blue, alpha, size, repeat;
-  function updateExampleColor() {
-    var colorExampleElement = document.getElementById('example-color');
-    colorExampleElement.style.backgroundColor = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+  function updateDrawSample() {
+    var drawSampleElement = document.getElementById('draw-sample');
+    drawSampleElement.style.backgroundColor = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+    drawSampleElement.style.height = size + "px";
+    drawSampleElement.style.width = size + "px";
   }
   function updateDrawContentStyles() {
     red = document.getElementById('draw-color-red').value;
@@ -31,7 +33,7 @@
     alpha = document.getElementById('draw-color-alpha').value;
     size = document.getElementById('draw-size-px').value;
     repeat = document.getElementById('draw-repeat-ms').value;
-    updateExampleColor();
+    updateDrawSample();
   }
   updateDrawContentStyles();
   var contentStyleElements = document.getElementsByClassName('content-style');
