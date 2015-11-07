@@ -20,6 +20,10 @@
 
   // DRAWING CONTENT STYLES
   var red, green, blue, alpha, size, repeat;
+  function updateExampleColor() {
+    var colorExampleElement = document.getElementById('example-color');
+    colorExampleElement.style.backgroundColor = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+  }
   function updateDrawContentStyles() {
     red = document.getElementById('draw-color-red').value;
     green = document.getElementById('draw-color-green').value;
@@ -27,8 +31,13 @@
     alpha = document.getElementById('draw-color-alpha').value;
     size = document.getElementById('draw-size-px').value;
     repeat = document.getElementById('draw-repeat-ms').value;
+    updateExampleColor();
   }
   updateDrawContentStyles();
+  var contentStyleElements = document.getElementsByClassName('content-style');
+  for (var i = 0; i < contentStyleElements.length; i++) {
+    contentStyleElements[i].addEventListener('change', updateDrawContentStyles);
+  }
 
   // MOUSE TRACKING
   var mouseX, mouseY;
@@ -42,7 +51,6 @@
   canvasElement.addEventListener('mousedown', startDrawing);
   var drawTimer;
   function startDrawing() {
-    updateDrawContentStyles();
     draw();
     drawTimer = setInterval(draw, repeat);
   }

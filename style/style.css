@@ -1,9 +1,11 @@
 header {
   height: 50px;
+  background: linen;
 }
 
 header div {
   display: inline-block;
+  border: 1px solid black;
 }
 
 #title {
@@ -12,16 +14,10 @@ header div {
   margin: auto;
 }
 
-#draw-color {
-  border: 1px solid red;
-}
-
-#draw-size {
-  border: 1px solid blue;
-}
-
-#draw-repeat {
-  border: 1px solid orange;
+#example-color {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
 }
 
 input {
@@ -29,7 +25,7 @@ input {
 }
 
 canvas {
-  background: linen;
+  background: white;
   margin: 0 auto;
   display: block;
   cursor: pointer;
