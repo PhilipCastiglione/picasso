@@ -27,12 +27,16 @@
     drawSampleElement.style.width = size + "px";
   }
   function updateDrawContentStyles() {
-    red = document.getElementById('draw-color-red').value;
-    green = document.getElementById('draw-color-green').value;
-    blue = document.getElementById('draw-color-blue').value;
-    alpha = document.getElementById('draw-color-alpha').value;
-    size = document.getElementById('draw-size-px').value;
-    repeat = document.getElementById('draw-repeat-ms').value;
+    red = document.getElementById('red').value;
+    green = document.getElementById('green').value;
+    blue = document.getElementById('blue').value;
+    alpha = document.getElementById('alpha').value;
+    size = document.getElementById('size').value;
+    if (document.getElementsByName('rate')[0].checked) {
+      repeat = 0;
+    } else {
+      repeat = 10000;
+    }
     updateDrawSample();
   }
   updateDrawContentStyles();
