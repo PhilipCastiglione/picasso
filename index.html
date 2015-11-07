@@ -9,7 +9,10 @@
 <body>
   <header id="header">
     <div id="title">Picasso</div>
-    <div id="draw-color">
+    <div id="sample-container">
+      <div id="draw-sample"></div>
+    </div>
+    <div id="draw-settings">
       <label for="red">red</label>
       <input class="content-style" id="red" type="range" min="0" max="255" step="5">
       <label for="green">green</label>
@@ -17,18 +20,14 @@
       <label for="blue">blue</label>
       <input class="content-style" id="blue" type="range" min="0" max="255" step="5">
       <label for="alpha">transparancy</label>
-      <input class="content-style" id="alpha" type="range" min="0" max="1" step=".05">
+      <input class="content-style" id="alpha" type="range" min="0" max="1" step=".05" value="1">
       <label for="size">size</label>
       <input class="content-style" id="size" type="range" min="2" max="80" value="10">
-      <label for="draw">draw</label>
-      <input class="content-style" id="draw" type="radio" name="rate" checked>
-      <label for="click">click</label>
-      <input class="content-style" id="click" type="radio" name="rate">
+      <label class="radio" for="draw">draw</label>
+      <input class="content-style radio" id="draw" type="radio" name="rate" checked>
+      <label class="radio" for="click">click</label>
+      <input class="content-style radio" id="click" type="radio" name="rate">
     </div>
-    <!-- <div id="draw-repeat">
-      repeat: <input class="content-style" id="draw-repeat-ms" type="text" value="20">
-    </div> -->
-    <div id="draw-sample"></div>
   </header>
   <canvas id="canvas"></canvas>
   <script src='script/script.js'></script>
