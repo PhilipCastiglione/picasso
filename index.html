@@ -10,9 +10,6 @@
   <header id="header">
     <h1>Picasso</h1>
   </header>
-    <div id="sample-container">
-      <div id="draw-sample"></div>
-    </div>
     <div id="draw-settings">
       <label for="red">red</label>
       <input class="content-style" id="red" type="range" min="0" max="255" step="5">
@@ -24,16 +21,20 @@
       <input class="content-style" id="alpha" type="range" min="0" max="1" step=".05" value="1">
       <label for="size">size</label>
       <input class="content-style" id="size" type="range" min="2" max="80" value="10">
-      <label class="radio" for="draw">draw</label>
-      <input class="content-style radio" id="draw" type="radio" name="rate" checked>
-      <label class="radio" for="click">click</label>
-      <input class="content-style radio" id="click" type="radio" name="rate">
+      <p>
+        <label class="radio" for="draw">draw</label>
+        <input class="content-style radio" id="draw" type="radio" name="rate" checked>
+      </p>
+      <p>
+        <label class="radio" for="click">click</label>
+        <input class="content-style radio" id="click" type="radio" name="rate">
+      </p>
     </div>
     <div id="shapes">
-      <div class="shape" id="square"></div>
-      <div class="shape" id="circle"></div>
-      <div class="shape" id="triangle"></div>
-      <div class="shape" id="diamond"></div>
+      <div class="shape square" data-shape="square"></div>
+      <div class="shape circle" data-shape="circle"></div>
+      <div class="shape triangle" data-shape="triangle"></div>
+      <div class="shape diamond" data-shape="diamond"></div>
     </div>
   <canvas id="canvas"></canvas>
   <script src='script/script.js'></script>
