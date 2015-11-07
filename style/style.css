@@ -23,20 +23,20 @@ h1 {
   cursor: pointer;
 }
 
-#square {
+.square {
   width: 40px;
   height: 40px;
   background: grey;
 }
 
-#circle {
+.circle {
   width: 40px;
   height: 40px;
   background: grey;
   border-radius: 50%;
 }
 
-#triangle {
+.triangle {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
@@ -44,7 +44,7 @@ h1 {
   border-bottom: 40px solid grey;
 }
 
-#diamond {
+.diamond {
   width: 0;
   height: 0;
   border: 20px solid transparent;
@@ -53,7 +53,7 @@ h1 {
   top: -20px;
 }
 
-#diamond:after {
+.diamond:after {
   content: '';
   position: absolute;
   left: -20px;
@@ -65,37 +65,23 @@ h1 {
 }
 
 /* RIGHT ASIDE */
-#sample-container {
-  position: fixed;
-  top: 70px;
-  right: 30px;
-  background: rgb(240, 240, 240);
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-  border-radius: 15px;
-}
-
-#draw-sample {
-  vertical-align: middle;
-  display: inline-block;
-  margin: 5px;
-}
-
 #draw-settings {
   position: fixed;
-  top: 200px;
-  right: 20px;
+  top: 230px;
+  right: 30px;
   text-align: center;
+  width: 110px;
 }
 
-input {
+.content-style {
   display: block;
+  width: 110px;
 }
 
 .radio {
   display: inline;
+  width: 20px;
+  margin-top: 10px;
 }
 
 /* CANVAS GRID */
