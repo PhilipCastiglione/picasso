@@ -92,5 +92,6 @@
   canvasElement.addEventListener('mouseup', stopDrawing);
   function stopDrawing() {
     clearInterval(drawTimer);
+    // maybe make this clear all timers somehow
   }
 })();
