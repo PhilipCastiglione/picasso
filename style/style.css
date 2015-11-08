@@ -21,47 +21,8 @@ h1 {
   margin: 5px;
   display: inline-block;
   cursor: pointer;
-}
-
-.square {
   width: 40px;
   height: 40px;
-  background: grey;
-}
-
-.circle {
-  width: 40px;
-  height: 40px;
-  background: grey;
-  border-radius: 50%;
-}
-
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 40px solid grey;
-}
-
-.diamond {
-  width: 0;
-  height: 0;
-  border: 20px solid transparent;
-  border-bottom-color: grey;
-  position: relative;
-  top: -20px;
-}
-
-.diamond:after {
-  content: '';
-  position: absolute;
-  left: -20px;
-  top: 20px;
-  width: 0;
-  height: 0;
-  border: 20px solid transparent;
-  border-top-color: grey;
 }
 
 /* RIGHT ASIDE */
