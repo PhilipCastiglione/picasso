@@ -26,27 +26,39 @@
     ctx.fillRect(mouseX - size / 2, mouseY - headerHeight - size / 2, size, size);
   }
   function drawCircle() {
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.beginPath();
     ctx.arc(mouseX, mouseY - headerHeight, size / 2, 0, Math.PI*2, true);
+    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.fill();
   }
   function drawTriangle() {
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.beginPath();
     ctx.moveTo(mouseX, mouseY - size / 2 - headerHeight);
     ctx.lineTo(mouseX + size / 2, mouseY + size / 2 - headerHeight);
     ctx.lineTo(mouseX - size / 2, mouseY + size / 2 - headerHeight);
+    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.fill();
   }
   function drawDiamond() {
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.beginPath();
     ctx.moveTo(mouseX, mouseY - size / 2 - headerHeight);
     ctx.lineTo(mouseX + size / 2, mouseY - headerHeight);
     ctx.lineTo(mouseX, mouseY + size / 2 - headerHeight);
     ctx.lineTo(mouseX - size / 2, mouseY - headerHeight);
+    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.fill();
+  }
+  function drawStar() {
+    var alpha = 2 * Math.PI / 10; 
+    ctx.beginPath();
+    for(var i = 0; i < 11; i++) {
+        var r = (size / 2) * (i % 2 + 1) / 2;
+        var omega = alpha * i;
+        ctx.lineTo((r * Math.sin(omega)) + mouseX, (r * Math.cos(omega)) + mouseY - headerHeight);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+    ctx.stroke();
   }
   function drawShape() {
     switch (shape) {
@@ -61,6 +73,9 @@
         break;
       case 'diamond':
         drawDiamond();
+        break;
+      case 'star':
+        drawStar();
         break;
       default:
         console.log('drawShape error');
