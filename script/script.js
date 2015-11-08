@@ -8,7 +8,7 @@
   function updateDrawSample() {
     mouseX = window.innerWidth - 85;
     mouseY = 140;
-    ctx.fillStyle = "rgb(245, 245, 245)";
+    ctx.fillStyle = "rgb(250, 250, 250)";
     ctx.fillRect(mouseX - 50, mouseY - headerHeight - 50, 100, 100);
     drawShape();
   }
