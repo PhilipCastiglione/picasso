@@ -31,6 +31,23 @@
     ctx.arc(mouseX, mouseY - headerHeight, size / 2, 0, Math.PI*2, true);
     ctx.fill();
   }
+  function drawTriangle() {
+    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+    ctx.beginPath();
+    ctx.moveTo(mouseX, mouseY - size / 2 - headerHeight);
+    ctx.lineTo(mouseX + size / 2, mouseY + size / 2 - headerHeight);
+    ctx.lineTo(mouseX - size / 2, mouseY + size / 2 - headerHeight);
+    ctx.fill();
+  }
+  function drawDiamond() {
+    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
+    ctx.beginPath();
+    ctx.moveTo(mouseX, mouseY - size / 2 - headerHeight);
+    ctx.lineTo(mouseX + size / 2, mouseY - headerHeight);
+    ctx.lineTo(mouseX, mouseY + size / 2 - headerHeight);
+    ctx.lineTo(mouseX - size / 2, mouseY - headerHeight);
+    ctx.fill();
+  }
   function drawShape() {
     switch (shape) {
       case 'square':
@@ -38,6 +55,12 @@
         break;
       case 'circle':
         drawCircle();
+        break;
+      case 'triangle':
+        drawTriangle();
+        break;
+      case 'diamond':
+        drawDiamond();
         break;
       default:
         console.log('drawShape error');
