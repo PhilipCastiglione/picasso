@@ -8,6 +8,17 @@ header {
 h1 {
   font-size: 2em;
 }
+#save {
+  position: fixed;
+  top: 15px;
+  right: 60px;
+}
+
+#undo {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+}
 
 /* LEFT ASIDE */
 #shapes {
