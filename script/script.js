@@ -3,8 +3,8 @@
   var canvasElement = document.getElementById('canvas');
   var ctx = canvasElement.getContext('2d');
 
-  // CANVAS DRAW FUNCTION
-  var shape = 'square';
+  // DRAW SAMPLE
+  var headerHeight = document.getElementById('header').offsetHeight;
   function updateDrawSample() {
     mouseX = window.innerWidth - 85;
     mouseY = 140;
@@ -12,15 +12,19 @@
     ctx.fillRect(mouseX - 50, mouseY - headerHeight - 50, 100, 100);
     drawShape();
   }
+  var shape = 'square';
   function updateShape() {
     shape = event.target.dataset.shape;
     updateDrawSample();
   }
+
+  // EVENT LISTENERS
   var shapes = document.getElementsByClassName('shape');
   for (var i = 0; i < shapes.length; i++) {
     shapes[i].addEventListener('click', updateShape);
   }
-  var headerHeight = document.getElementById('header').offsetHeight;
+
+  // SHAPES
   function drawSquare() {
     ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.fillRect(mouseX - size / 2, mouseY - headerHeight - size / 2, size, size);
@@ -60,6 +64,22 @@
     ctx.strokeStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
     ctx.stroke();
   }
+
+  // CANVAS STATE
+  function save() {
+    // need toDataUrl
+    // console.log('saving');
+    // ctx.save();
+  }
+  save();
+  function undo() {
+    // console.log('restoring');
+    // ctx.restore();
+  }
+  document.getElementById('save').addEventListener('click', save);
+  document.getElementById('undo').addEventListener('click', undo);
+
+  // CANVAS DRAW FUNCTION
   function drawShape() {
     switch (shape) {
       case 'square':
@@ -124,6 +144,7 @@
   canvasElement.addEventListener('mousedown', startDrawing);
   var drawTimer;
   function startDrawing() {
+    // save();
     drawShape();
     drawTimer = setInterval(drawShape, repeat);
   }
