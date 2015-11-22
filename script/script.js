@@ -66,18 +66,34 @@
   }
 
   // CANVAS STATE
+  function resetCanvas() {
+    ctx.fillStyle = "rgb(255, 255, 255)";
+    ctx.fillRect(0, 0, canvasElement.width, canvasElement.height);
+  }
   function save() {
-    // need toDataUrl
-    // console.log('saving');
-    // ctx.save();
+    // undoHistory.push(canvasElement.toDataURL());
   }
-  save();
-  function undo() {
-    // console.log('restoring');
-    // ctx.restore();
-  }
+  var undoHistory = [];
+  var redoHistory = [];
   document.getElementById('save').addEventListener('click', save);
+  function undo() {
+    redoHistory.push(undoHistory.pop());
+    var img = document.createElement('img')
+    img.src = redoHistory[redoHistory.length - 1];
+    resetCanvas();
+    ctx.drawImage(img, 0, 0);
+    updateDrawSample();
+  }
   document.getElementById('undo').addEventListener('click', undo);
+  function redo() {
+    undoHistory.push(redoHistory.pop());
+    var img = document.createElement('img')
+    img.src = undoHistory[undoHistory.length - 1];
+    resetCanvas();
+    ctx.drawImage(img, 0, 0);
+    updateDrawSample();
+  }
+  document.getElementById('redo').addEventListener('click', redo);
 
   // CANVAS DRAW FUNCTION
   function drawShape() {
