@@ -74,6 +74,7 @@
       style.green = document.getElementById('green').value;
       style.blue = document.getElementById('blue').value;
       style.alpha = document.getElementById('alpha').value;
+      style.rgba = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
       style.size = document.getElementById('size').value;
       if (document.getElementsByName('rate')[0].checked) {
         style.rate = 0;
@@ -116,13 +117,13 @@
       clearInterval(draw.timer);
     },
     square: function() {
-      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fillStyle = style.rgba;
       canvas.context.fillRect(page.mouseX - style.size / 2, page.mouseY - page.headerHeight - style.size / 2, style.size, style.size);
     },
     circle: function() {
       canvas.context.beginPath();
       canvas.context.arc(page.mouseX, page.mouseY - page.headerHeight, style.size / 2, 0, Math.PI*2, true);
-      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fillStyle = style.rgba;
       canvas.context.fill();
     },
     triangle: function() {
@@ -130,7 +131,7 @@
       canvas.context.moveTo(page.mouseX, page.mouseY - style.size / 2 - page.headerHeight);
       canvas.context.lineTo(page.mouseX + style.size / 2, page.mouseY + style.size / 2 - page.headerHeight);
       canvas.context.lineTo(page.mouseX - style.size / 2, page.mouseY + style.size / 2 - page.headerHeight);
-      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fillStyle = style.rgba;
       canvas.context.fill();
     },
     diamond: function() {
@@ -139,7 +140,7 @@
       canvas.context.lineTo(page.mouseX + style.size / 2, page.mouseY - page.headerHeight);
       canvas.context.lineTo(page.mouseX, page.mouseY + style.size / 2 - page.headerHeight);
       canvas.context.lineTo(page.mouseX - style.size / 2, page.mouseY - page.headerHeight);
-      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fillStyle = style.rgba;
       canvas.context.fill();
     },
     star: function() {
@@ -151,7 +152,7 @@
         canvas.context.lineTo((r * Math.sin(omega)) + page.mouseX, (r * Math.cos(omega)) + page.mouseY - page.headerHeight);
       }
       canvas.context.closePath();
-      canvas.context.strokeStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.strokeStyle = style.rgba;
       canvas.context.stroke();
     }
   };
