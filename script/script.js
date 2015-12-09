@@ -1,172 +1,192 @@
 (function(){
-  // CANVAS CONFIG
-  var canvasElement = document.getElementById('canvas');
-  var ctx = canvasElement.getContext('2d');
 
-  // DRAW SAMPLE
-  var headerHeight = document.getElementById('header').offsetHeight;
-  function updateDrawSample() {
-    mouseX = window.innerWidth - 85;
-    mouseY = 140;
-    ctx.fillStyle = "rgb(250, 250, 250)";
-    ctx.fillRect(mouseX - 50, mouseY - headerHeight - 50, 100, 100);
-    drawShape();
-  }
-  var shape = 'square';
-  function updateShape() {
-    shape = event.target.dataset.shape;
-    updateDrawSample();
-  }
-
-  // EVENT LISTENERS
-  var shapes = document.getElementsByClassName('shape');
-  for (var i = 0; i < shapes.length; i++) {
-    shapes[i].addEventListener('click', updateShape);
-  }
-
-  // SHAPES
-  function drawSquare() {
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    ctx.fillRect(mouseX - size / 2, mouseY - headerHeight - size / 2, size, size);
-  }
-  function drawCircle() {
-    ctx.beginPath();
-    ctx.arc(mouseX, mouseY - headerHeight, size / 2, 0, Math.PI*2, true);
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    ctx.fill();
-  }
-  function drawTriangle() {
-    ctx.beginPath();
-    ctx.moveTo(mouseX, mouseY - size / 2 - headerHeight);
-    ctx.lineTo(mouseX + size / 2, mouseY + size / 2 - headerHeight);
-    ctx.lineTo(mouseX - size / 2, mouseY + size / 2 - headerHeight);
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    ctx.fill();
-  }
-  function drawDiamond() {
-    ctx.beginPath();
-    ctx.moveTo(mouseX, mouseY - size / 2 - headerHeight);
-    ctx.lineTo(mouseX + size / 2, mouseY - headerHeight);
-    ctx.lineTo(mouseX, mouseY + size / 2 - headerHeight);
-    ctx.lineTo(mouseX - size / 2, mouseY - headerHeight);
-    ctx.fillStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    ctx.fill();
-  }
-  function drawStar() {
-    var alpha = 2 * Math.PI / 10; 
-    ctx.beginPath();
-    for(var i = 0; i < 11; i++) {
-        var r = (size / 2) * (i % 2 + 1) / 2;
-        var omega = alpha * i;
-        ctx.lineTo((r * Math.sin(omega)) + mouseX, (r * Math.cos(omega)) + mouseY - headerHeight);
+  var page = {
+    initialize: function() {
+      // init event listeners
+      for (var i = 0; i < this.shapes.length; i++) {
+        this.shapes[i].addEventListener('click', draw.updateShape);
+        this.shapes[i].addEventListener('click', style.update);
+        this.shapes[i].addEventListener('click', style.render);
+      }
+      window.onmousemove = this.trackMouse;
+    },
+    headerHeight: document.getElementById('header').offsetHeight,
+    shapes: document.getElementsByClassName('shape'),
+    trackMouse: function() {
+      page.mouseX = event.clientX;
+      page.mouseY = event.clientY;
     }
-    ctx.closePath();
-    ctx.strokeStyle = "rgba(" + red + "," + green + "," + blue + "," + alpha +")";
-    ctx.stroke();
-  }
+  };
 
-  // CANVAS STATE
-  function resetCanvas() {
-    ctx.fillStyle = "rgb(255, 255, 255)";
-    ctx.fillRect(0, 0, canvasElement.width, canvasElement.height);
-  }
-  function save() {
-    // undoHistory.push(canvasElement.toDataURL());
-  }
-  var undoHistory = [];
-  var redoHistory = [];
-  document.getElementById('save').addEventListener('click', save);
-  function undo() {
-    redoHistory.push(undoHistory.pop());
-    var img = document.createElement('img')
-    img.src = redoHistory[redoHistory.length - 1];
-    resetCanvas();
-    ctx.drawImage(img, 0, 0);
-    updateDrawSample();
-  }
-  document.getElementById('undo').addEventListener('click', undo);
-  function redo() {
-    undoHistory.push(redoHistory.pop());
-    var img = document.createElement('img')
-    img.src = undoHistory[undoHistory.length - 1];
-    resetCanvas();
-    ctx.drawImage(img, 0, 0);
-    updateDrawSample();
-  }
-  document.getElementById('redo').addEventListener('click', redo);
-
-  // CANVAS DRAW FUNCTION
-  function drawShape() {
-    switch (shape) {
+  var canvas = {
+    initialize: function() {
+      // init event listeners
+      window.onresize = this.setSize;
+      // set initial canvas size
+      this.setSize();
+    },
+    element: document.getElementById('canvas'),
+    context: document.getElementById('canvas').getContext('2d'),
+    setSize: function() {
+      canvas.element.width = window.innerWidth;
+      canvas.element.height = window.innerHeight - page.headerHeight;
+    },
+    render: function() {
+      switch (draw.shape) {
       case 'square':
-        drawSquare();
+        draw.square();
         break;
       case 'circle':
-        drawCircle();
+        draw.circle();
         break;
       case 'triangle':
-        drawTriangle();
+        draw.triangle();
         break;
       case 'diamond':
-        drawDiamond();
+        draw.diamond();
         break;
       case 'star':
-        drawStar();
+        draw.star();
         break;
       default:
-        console.log('drawShape error');
+        console.log('rendering error');
         break;
+      }
+    },
+    reset: function() {
+      canvas.context.fillStyle = "rgb(255, 255, 255)";
+      canvas.context.fillRect(0, 0, canvas.element.width, canvas.element.height);
+    }
+  };
+
+  var style = {
+    initialize: function() {
+      // init properties
+      this.update();
+      // init event listeners
+      for (var i = 0; i < this.styleElements.length; i++) {
+        this.styleElements[i].addEventListener('change', this.update);
+      }
+    },
+    styleElements: document.getElementsByClassName('content-style'),
+    update: function() {
+      style.red = document.getElementById('red').value;
+      style.green = document.getElementById('green').value;
+      style.blue = document.getElementById('blue').value;
+      style.alpha = document.getElementById('alpha').value;
+      style.size = document.getElementById('size').value;
+      if (document.getElementsByName('rate')[0].checked) {
+        style.rate = 0;
+      } else {
+        style.rate = 10000;
+      }
+      sample.render();
+    }
+  };
+
+  var sample = {
+    initialize: function() {
+      // display initial sample 
+      this.render();
+    },
+    render: function() {
+      page.mouseX = window.innerWidth - 85;
+      page.mouseY = 140;
+      canvas.context.fillStyle = "rgb(250, 250, 250)";
+      canvas.context.fillRect(page.mouseX - 50, page.mouseY - page.headerHeight - 50, 100, 100);
+      canvas.render();
+    }
+  };
+
+  var draw = {
+    initialize: function() {
+      // init event listeners
+      canvas.element.addEventListener('mousedown', draw.start);
+      canvas.element.addEventListener('mouseup', draw.stop);
+    },
+    shape: 'square',
+    updateShape: function() {
+      draw.shape = event.target.dataset.shape;
+    },
+    start: function() {
+      canvas.render();
+      draw.timer = setInterval(canvas.render, style.rate);
+    },
+    stop: function() {
+      clearInterval(draw.timer);
+    },
+    square: function() {
+      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fillRect(page.mouseX - style.size / 2, page.mouseY - page.headerHeight - style.size / 2, style.size, style.size);
+    },
+    circle: function() {
+      canvas.context.beginPath();
+      canvas.context.arc(page.mouseX, page.mouseY - page.headerHeight, style.size / 2, 0, Math.PI*2, true);
+      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fill();
+    },
+    triangle: function() {
+      canvas.context.beginPath();
+      canvas.context.moveTo(page.mouseX, page.mouseY - style.size / 2 - page.headerHeight);
+      canvas.context.lineTo(page.mouseX + style.size / 2, page.mouseY + style.size / 2 - page.headerHeight);
+      canvas.context.lineTo(page.mouseX - style.size / 2, page.mouseY + style.size / 2 - page.headerHeight);
+      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fill();
+    },
+    diamond: function() {
+      canvas.context.beginPath();
+      canvas.context.moveTo(page.mouseX, page.mouseY - style.size / 2 - page.headerHeight);
+      canvas.context.lineTo(page.mouseX + style.size / 2, page.mouseY - page.headerHeight);
+      canvas.context.lineTo(page.mouseX, page.mouseY + style.size / 2 - page.headerHeight);
+      canvas.context.lineTo(page.mouseX - style.size / 2, page.mouseY - page.headerHeight);
+      canvas.context.fillStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.fill();
+    },
+    star: function() {
+      var alpha = 2 * Math.PI / 10; 
+      canvas.context.beginPath();
+      for(var i = 0; i < 11; i++) {
+        var r = (style.size / 2) * (i % 2 + 1) / 2;
+        var omega = alpha * i;
+        canvas.context.lineTo((r * Math.sin(omega)) + page.mouseX, (r * Math.cos(omega)) + page.mouseY - page.headerHeight);
+      }
+      canvas.context.closePath();
+      canvas.context.strokeStyle = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      canvas.context.stroke();
+    }
+  };
+
+  var history = {
+    initialize: function() {
+      // init event listeners
+      document.getElementById('undo').addEventListener('click', this.undo);
+      document.getElementById('redo').addEventListener('click', this.redo);
+    },
+    undoHistory: [],
+    redoHistory: [],
+    undo: function() {
+      history.redoHistory.push(history.undoHistory.pop());
+      var img = document.createElement('img');
+      img.src = history.redoHistory[history.redoHistory.length - 1];
+      canvas.reset();
+      canvas.context.drawImage(img, 0, 0);
+      sample.render();
+    },
+    redo: function() {
+      history.undoHistory.push(history.redoHistory.pop());
+      var img = document.createElement('img');
+      img.src = history.undoHistory[history.undoHistory.length - 1];
+      canvas.reset();
+      canvas.context.drawImage(img, 0, 0);
+      sample.render();
     }
   }
 
-  // CANVAS SIZE
-  function setCanvasSize() {
-    canvasElement.width = window.innerWidth;
-    canvasElement.height = window.innerHeight - headerHeight;
-  }
-  setCanvasSize();
-  window.onresize = setCanvasSize;
+  page.initialize();
+  canvas.initialize();
+  style.initialize();
+  sample.initialize();
+  draw.initialize();
+  history.initialize();
 
-  // DRAWING CONTENT STYLES
-  var red, green, blue, alpha, size, repeat;
-  function updateDrawContentStyles() {
-    red = document.getElementById('red').value;
-    green = document.getElementById('green').value;
-    blue = document.getElementById('blue').value;
-    alpha = document.getElementById('alpha').value;
-    size = document.getElementById('size').value;
-    if (document.getElementsByName('rate')[0].checked) {
-      repeat = 0;
-    } else {
-      repeat = 10000;
-    }
-    updateDrawSample();
-  }
-  updateDrawContentStyles();
-  var contentStyleElements = document.getElementsByClassName('content-style');
-  for (var i = 0; i < contentStyleElements.length; i++) {
-    contentStyleElements[i].addEventListener('change', updateDrawContentStyles);
-  }
-
-  // MOUSE TRACKING
-  var mouseX, mouseY;
-  function trackMouse() {
-    mouseX = event.clientX;
-    mouseY = event.clientY;
-  }
-  window.onmousemove = trackMouse;
-
-  // DRAWING MOUSE EVENTS
-  canvasElement.addEventListener('mousedown', startDrawing);
-  var drawTimer;
-  function startDrawing() {
-    // save();
-    drawShape();
-    drawTimer = setInterval(drawShape, repeat);
-  }
-  canvasElement.addEventListener('mouseup', stopDrawing);
-  function stopDrawing() {
-    clearInterval(drawTimer);
-    // maybe make this clear all timers somehow
-  }
 })();
