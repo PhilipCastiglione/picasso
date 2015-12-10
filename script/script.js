@@ -118,6 +118,7 @@
     },
     stop: function() {
       clearInterval(draw.timer);
+      history.store();
     },
     square: function() {
       canvas.context.fillStyle = style.rgba;
@@ -180,24 +181,37 @@
       // init event listeners
       document.getElementById('undo').addEventListener('click', this.undo);
       document.getElementById('redo').addEventListener('click', this.redo);
+      this.store();
     },
     undoHistory: [],
     redoHistory: [],
+    store: function() {
+      history.undoHistory.push(canvas.context.getImageData(0, 0, canvas.element.width, canvas.element.height));
+      history.redoHistory = [];
+      console.log(history.undoHistory);
+      console.log(history.redoHistory);
+    },
     undo: function() {
-      history.redoHistory.push(history.undoHistory.pop());
-      var img = document.createElement('img');
-      img.src = history.redoHistory[history.redoHistory.length - 1];
-      canvas.reset();
-      canvas.context.drawImage(img, 0, 0);
-      sample.render();
+      if (history.undoHistory.length > 1) {
+        history.redoHistory.unshift(history.undoHistory.pop());
+        canvas.element.getContext("2d").putImageData(history.undoHistory[history.undoHistory.length - 1], 0, 0);
+        var img = document.createElement('img');
+        img.src = canvas.element.toDataURL();
+        canvas.reset();
+        canvas.context.drawImage(img, 0, 0);
+        sample.render();
+      }
     },
     redo: function() {
-      history.undoHistory.push(history.redoHistory.pop());
-      var img = document.createElement('img');
-      img.src = history.undoHistory[history.undoHistory.length - 1];
-      canvas.reset();
-      canvas.context.drawImage(img, 0, 0);
-      sample.render();
+      if (history.redoHistory.length > 0) {
+        history.undoHistory.push(history.redoHistory.pop());
+        canvas.element.getContext("2d").putImageData(history.redoHistory[history.redoHistory.length - 1], 0, 0);
+        var img = document.createElement('img');
+        img.src = canvas.element.toDataURL();
+        canvas.reset();
+        canvas.context.drawImage(img, 0, 0);
+        sample.render();
+      }
     }
   }
 
