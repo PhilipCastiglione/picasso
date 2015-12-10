@@ -2,11 +2,13 @@
 [try it out](http://philipcastiglione.github.io/picasso/)
 
 ### to do
-- add shapes
-- undo & redo
+- fix history logic errors
+- fix rightclick draw bug
+- fix mouseup on overlay bug
+- create random color button
+- create fill/draw option
 - saving
 - sharing
-- create random color changing over time
 - make it pretty
     - fonts
     - header
