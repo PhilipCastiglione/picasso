@@ -164,12 +164,12 @@
       var s = style.size;
       canvas.context.beginPath();
       canvas.context.moveTo(x, y - s * 1.5 / 8);
-      canvas.context.bezierCurveTo(x + s * 1 / 8, y - s * 3.5 / 8, x + s * 2.5 / 8 , y - s * 3.5 / 8, x + s * 3.5 / 8, y - s * 2 / 8);
-      canvas.context.bezierCurveTo(x + s * 4 / 8, y - s * 1.5 / 8, x + s * 4 / 8   , y              , x + s * 2 / 8  , y + s * 2 / 8);
+      canvas.context.bezierCurveTo(x + s * 1.0 / 8, y - s * 3.5 / 8, x + s * 2.5 / 8, y - s * 3.5 / 8, x + s * 3.5 / 8, y - s * 2.0 / 8);
+      canvas.context.bezierCurveTo(x + s * 4.0 / 8, y - s * 1.5 / 8, x + s * 4.0 / 8, y - s * 0.0 / 8, x + s * 2.0 / 8, y + s * 2.0 / 8);
       canvas.context.lineTo(x, y + s * 4 / 8);
       canvas.context.lineTo(x - s * 2 / 8, y + s * 2 / 8);
-      canvas.context.bezierCurveTo(x - s * 4 /8   , y              , x - s * 4 / 8, y - s * 1.5 / 8, x - s * 3.5 / 8, y - s * 2 / 8);
-      canvas.context.bezierCurveTo(x - s * 2.5 / 8, y - s * 3.5 / 8, x - s * 1 / 8, y - s * 3.5 / 8, x              , y - s * 1.5 / 8);
+      canvas.context.bezierCurveTo(x - s * 4.0 / 8, y - s * 0.0 / 8, x - s * 4.0 / 8, y - s * 1.5 / 8, x - s * 3.5 / 8, y - s * 2.0 / 8);
+      canvas.context.bezierCurveTo(x - s * 2.5 / 8, y - s * 3.5 / 8, x - s * 1.0 / 8, y - s * 3.5 / 8, x - s * 0.0 / 8, y - s * 1.5 / 8);
       canvas.context.strokeStyle = style.rgba;
       canvas.context.stroke();
     }
