@@ -48,6 +48,9 @@
       case 'star':
         draw.star();
         break;
+      case 'heart':
+        draw.heart();
+        break;
       default:
         console.log('rendering error');
         break;
@@ -122,7 +125,7 @@
     },
     circle: function() {
       canvas.context.beginPath();
-      canvas.context.arc(page.mouseX, page.mouseY - page.headerHeight, style.size / 2, 0, Math.PI*2, true);
+      canvas.context.arc(page.mouseX, page.mouseY - page.headerHeight, style.size / 2, 0, Math.PI * 2, true);
       canvas.context.fillStyle = style.rgba;
       canvas.context.fill();
     },
@@ -152,6 +155,21 @@
         canvas.context.lineTo((r * Math.sin(omega)) + page.mouseX, (r * Math.cos(omega)) + page.mouseY - page.headerHeight);
       }
       canvas.context.closePath();
+      canvas.context.strokeStyle = style.rgba;
+      canvas.context.stroke();
+    },
+    heart: function() {
+      var x = page.mouseX;
+      var y = page.mouseY - page.headerHeight;
+      var s = style.size;
+      canvas.context.beginPath();
+      canvas.context.moveTo(x, y - s * 1.5 / 8);
+      canvas.context.bezierCurveTo(x + s * 1 / 8, y - s * 3.5 / 8, x + s * 2.5 / 8 , y - s * 3.5 / 8, x + s * 3.5 / 8, y - s * 2 / 8);
+      canvas.context.bezierCurveTo(x + s * 4 / 8, y - s * 1.5 / 8, x + s * 4 / 8   , y              , x + s * 2 / 8  , y + s * 2 / 8);
+      canvas.context.lineTo(x, y + s * 4 / 8);
+      canvas.context.lineTo(x - s * 2 / 8, y + s * 2 / 8);
+      canvas.context.bezierCurveTo(x - s * 4 /8   , y              , x - s * 4 / 8, y - s * 1.5 / 8, x - s * 3.5 / 8, y - s * 2 / 8);
+      canvas.context.bezierCurveTo(x - s * 2.5 / 8, y - s * 3.5 / 8, x - s * 1 / 8, y - s * 3.5 / 8, x              , y - s * 1.5 / 8);
       canvas.context.strokeStyle = style.rgba;
       canvas.context.stroke();
     }
