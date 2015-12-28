@@ -1,5 +1,10 @@
 (function(){
 
+  //input (puts things into a queue)
+  //canvas (includes headerheight)
+  //draw/shapes
+  //render (for the loop) includes sample and operates on a queue
+
   var page = {
     initialize: function() {
       // init event listeners
@@ -32,29 +37,7 @@
       canvas.element.height = window.innerHeight - page.headerHeight;
     },
     render: function() {
-      switch (draw.shape) {
-      case 'square':
-        draw.square();
-        break;
-      case 'circle':
-        draw.circle();
-        break;
-      case 'triangle':
-        draw.triangle();
-        break;
-      case 'diamond':
-        draw.diamond();
-        break;
-      case 'star':
-        draw.star();
-        break;
-      case 'heart':
-        draw.heart();
-        break;
-      default:
-        console.log('rendering error');
-        break;
-      }
+      draw[draw.shape]();
     },
     reset: function() {
       canvas.context.fillStyle = "rgb(255, 255, 255)";
@@ -65,6 +48,10 @@
   var style = {
     initialize: function() {
       // init properties
+      style.red = document.getElementById('red');
+      style.green = document.getElementById('green');
+      style.blue = document.getElementById('blue');
+      style.alpha = document.getElementById('alpha');
       this.update();
       // init event listeners
       for (var i = 0; i < this.styleElements.length; i++) {
@@ -73,11 +60,7 @@
     },
     styleElements: document.getElementsByClassName('content-style'),
     update: function() {
-      style.red = document.getElementById('red').value;
-      style.green = document.getElementById('green').value;
-      style.blue = document.getElementById('blue').value;
-      style.alpha = document.getElementById('alpha').value;
-      style.rgba = "rgba(" + style.red + "," + style.green + "," + style.blue + "," + style.alpha +")";
+      style.rgba = "rgba(" + style.red.value + "," + style.green.value + "," + style.blue.value + "," + style.alpha.value +")";
       style.size = document.getElementById('size').value;
       if (document.getElementsByName('rate')[0].checked) {
         style.rate = 0;
